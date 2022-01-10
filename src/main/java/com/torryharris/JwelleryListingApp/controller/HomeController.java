@@ -1,13 +1,17 @@
 package com.torryharris.JwelleryListingApp.controller;
 
 import com.torryharris.JwelleryListingApp.global.GlobalData;
+import com.torryharris.JwelleryListingApp.model.Product;
 import com.torryharris.JwelleryListingApp.service.CategoryService;
 import com.torryharris.JwelleryListingApp.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.List;
 
 @Controller
 public class HomeController {
@@ -23,6 +27,12 @@ public class HomeController {
     @GetMapping("/logout")
     public String logout(){
         return "login";
+    }
+    @GetMapping("/shop/search")
+    public String search(@Param("keyword") String keyword,Model model){
+        List<Product> searchresult=productService.search(keyword);
+        model.addAttribute("searchresult",searchresult);
+        return "searchResult";
     }
     @GetMapping("/shop")
     public String shop(Model model){

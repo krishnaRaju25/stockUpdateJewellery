@@ -13,6 +13,9 @@ import java.util.Optional;
 public class ProductService {
     @Autowired
     ProductRepository productRepository;
+    public List<Product> search(String keyword){
+        return productRepository.search(keyword);
+    }
     public List<Product> getAllProduct(){
         return productRepository.findAll();
     }

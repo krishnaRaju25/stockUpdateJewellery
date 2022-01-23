@@ -26,7 +26,7 @@ public class HomeController {
     }
     @GetMapping("/logout")
     public String logout(){
-        return "login";
+        return "sign";
     }
     @GetMapping("/shop/search")
     public String search(@Param("keyword") String keyword,Model model){
@@ -54,4 +54,5 @@ public class HomeController {
         model.addAttribute("cartCount", GlobalData.cart.size());
         return "viewProduct";
     }
+
 }

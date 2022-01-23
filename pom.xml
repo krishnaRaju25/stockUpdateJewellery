@@ -94,7 +94,6 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		<finalName>thbs-jewellery</finalName>
 	</build>
 
 </project>

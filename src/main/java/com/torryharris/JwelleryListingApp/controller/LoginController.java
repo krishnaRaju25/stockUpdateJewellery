@@ -15,20 +15,20 @@ public class LoginController {
     UserRepository userRepo;
     @GetMapping("/login")
     public String login(){
-        return "login";
+        return "sign";
     }
     @GetMapping("/register")
     public String register(){
-        return "register";
+        return "sign";
     }
     @GetMapping("/error")
     public String error(){
-        return "login";
+        return "sign";
     }
     @RequestMapping("/register")
     public String registerdb(User user){
         userRepo.save(user);
-        return "login";
+        return "sign";
     }
     @RequestMapping("/login")
     public String user(User user, HttpServletRequest request){

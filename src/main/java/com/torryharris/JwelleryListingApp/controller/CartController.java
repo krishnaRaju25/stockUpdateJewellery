@@ -8,28 +8,47 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class CartController {
     @Autowired
     ProductService productService;
     @GetMapping("/addToCart/{id}")
-    public String addToCart(@PathVariable int id){
-        GlobalData.cart.add(productService.getProductById(id).get());
-        return "redirect:/shop";
+    public String addToCart(@PathVariable int id,Model model){
+
+          GlobalData.cart.add(productService.getProductById(id).get());
+          model.addAttribute("stock",productService.getStockDec(id));
+
+         // System.out.print(model.addAttribute("stock",productService.getStockDec(id)));
+          return "redirect:/shop";
     }
     @GetMapping("/cart")
     public String cartGet(Model model){
-        model.addAttribute("cartCount",GlobalData.cart.size());
-        model.addAttribute("total",GlobalData.cart.stream().mapToDouble(Product::getPrice).sum());
-        model.addAttribute("cart",GlobalData.cart);
+        model.addAttribute("cartCount",GlobalData.cart.size()); //cartvalue
+        model.addAttribute("total",GlobalData.cart.stream().mapToDouble(Product::getPrice).sum()); //price
+        model.addAttribute("cart",GlobalData.cart); //details
         return "cart";
     }
     @GetMapping("/cart/removeItem/{index}")
-    public String cartItemRemove(@PathVariable int index){
+    public String cartItemRemove(@PathVariable int index, Model model){ //remove from cart product(id,name...)
         GlobalData.cart.remove(index);
         return "redirect:/cart";
     }
+
+//    @GetMapping("/cart/cancel/{id}")
+//    public String CartDec(@PathVariable int id,Model model)
+//    {
+//        model.addAttribute("product",productService.getAllProduct());
+//        model.addAttribute("stock",productService.getStockDec(id));
+//        return "redirect:/shop";
+//    }
+
     @GetMapping("/checkout")
     public String checkOut(Model model){
         model.addAttribute("total",GlobalData.cart.stream().mapToDouble(Product::getPrice).sum());

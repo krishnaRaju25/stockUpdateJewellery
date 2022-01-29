@@ -79,6 +79,7 @@ public class AdminController {
         product.setCategory(categoryService.getCategoryById(productDTO.getCategoryId()).get());
         product.setPrice(productDTO.getPrice());
         product.setWeight(productDTO.getWeight());
+        product.setStock(productDTO.getStock());
         product.setDescription(productDTO.getDescription());
         String imageUUID;
         if(!file.isEmpty()){
@@ -106,6 +107,7 @@ public class AdminController {
         productDTO.setCategoryId(product.getCategory().getId());
         productDTO.setPrice(product.getPrice());
         productDTO.setWeight(product.getWeight());
+        productDTO.setStock(product.getStock());
         productDTO.setDescription(product.getDescription());
         productDTO.setImageName(product.getImageName());
         model.addAttribute("categories",categoryService.getAllCategory());

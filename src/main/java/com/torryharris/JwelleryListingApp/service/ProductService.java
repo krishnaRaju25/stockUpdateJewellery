@@ -1,6 +1,5 @@
 package com.torryharris.JwelleryListingApp.service;
 
-import com.torryharris.JwelleryListingApp.model.Category;
 import com.torryharris.JwelleryListingApp.model.Product;
 import com.torryharris.JwelleryListingApp.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +29,13 @@ public class ProductService {
     }
     public List<Product> getAllProductByCategoryId(int id){
         return productRepository.findAllByCategory_Id(id);
+    }
+    public int getStockDec(int id)
+    {
+        return productRepository.StockDecrement(id);
+    }
+
+    public int getStockInc(int id) {
+        return productRepository.StockIncrement(id);
     }
 }

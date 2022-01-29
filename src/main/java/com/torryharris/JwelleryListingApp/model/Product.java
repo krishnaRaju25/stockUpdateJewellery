@@ -18,4 +18,5 @@ public class Product {
     private Double weight;
     private String description;
     private String imageName;
+    private int stock;
 }

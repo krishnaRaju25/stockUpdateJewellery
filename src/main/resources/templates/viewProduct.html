@@ -165,6 +165,9 @@
                 <li class="nav-item active">
                     <pre><span style="color:white; font-size:30px;" th:text="${cartCount}">0</span>        </pre>
                 </li>
+                Hurry only less stock available:
+
+
             </ul>
         </div>
         <center>
@@ -197,7 +200,11 @@
                 <spna th:text="${product.weight}"></spna> grams.
             </h5>
             <p th:text="${product.description}"></p>
-            <a href="" th:href="@{/addToCart/{id}(id = ${product.id})}" class="button button2" style="color:white;">Add to cart</a>
+            <a href="" th:href="@{/addToCart/{id}(id = ${product.id})}" onclick="" class="button button2" style="color:white;">Add to cart</a>
+                <div>
+                <label> hurry only : </label>
+                    <p th:text="${product.stock}">left</p>
+                </div>
             </center>
         </div>
     </div>
